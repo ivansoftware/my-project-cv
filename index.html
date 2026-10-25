@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ivan Manguilimotan — Web Developer portfolio. Building clean, responsive, and modern web experiences.">
+  <meta name="theme-color" content="#ffffff">
+  <title>Ivan Manguilimotan | Web Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #171923;
+      --muted: #687080;
+      --accent: #6558e8;
+      --accent-dark: #5043cf;
+      --accent-soft: #f0efff;
+      --line: #e9eaf0;
+      --surface: #f8f9fc;
+      --white: #fff;
+      --shadow: 0 18px 50px rgba(34, 37, 66, .09);
+      font-family: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      scroll-behavior: smooth;
+      scroll-padding-top: 88px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; color: var(--ink); background: var(--white); line-height: 1.65; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .container { width: min(1100px, calc(100% - 48px)); margin-inline: auto; }
+    .site-header {
+      position: sticky;
+      z-index: 10;
+      top: 0;
+      border-bottom: 1px solid rgba(233, 234, 240, .82);
+      background: rgba(255, 255, 255, .92);
+      backdrop-filter: blur(16px);
+    }
+    .nav-wrap { min-height: 72px; display: flex; align-items: center; justify-content: space-between; }
+    .brand {
+      width: 42px; height: 42px; display: grid; place-items: center;
+      border-radius: 13px; color: var(--white); background: var(--ink);
+      font-weight: 800; letter-spacing: -.04em;
+    }
+    .nav-links { display: flex; align-items: center; gap: 34px; }
+    .nav-links a { color: #555c6d; font-size: .9rem; font-weight: 600; transition: color .2s ease; }
+    .nav-links a:hover, .nav-links a:focus-visible { color: var(--accent); }
+    .menu-toggle {
+      display: none; width: 42px; height: 42px; place-items: center;
+      border: 1px solid var(--line); border-radius: 12px; background: var(--white); color: var(--ink);
+      cursor: pointer;
+    }
+    .menu-toggle svg { width: 21px; height: 21px; }
+
+    .hero { overflow: hidden; position: relative; padding: 100px 0 104px; background: radial-gradient(ellipse at 83% 52%, #f1efff 0, rgba(247, 246, 255, .65) 25%, transparent 51%); }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 58px; }
+    .eyebrow { margin: 0 0 12px; color: var(--accent); font-size: .93rem; font-weight: 700; letter-spacing: .02em; }
+    h1 { max-width: 640px; margin: 0; font-size: clamp(3rem, 6.5vw, 5.2rem); line-height: 1.04; letter-spacing: -.065em; }
+    .hero-role { margin: 18px 0 10px; color: var(--accent); font-size: 1.55rem; font-weight: 700; }
+    .hero-copy { max-width: 490px; margin: 0; color: var(--muted); font-size: 1.08rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 30px; }
+    .button {
+      min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 0 20px; border: 1px solid transparent; border-radius: 12px;
+      font-size: .92rem; font-weight: 700; transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+    }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary { color: var(--white); background: var(--accent); box-shadow: 0 8px 20px rgba(101, 88, 232, .22); }
+    .button-primary:hover { background: var(--accent-dark); }
+    .button-secondary { border-color: var(--line); color: var(--ink); background: var(--white); }
+    .button svg { width: 17px; height: 17px; }
+    .social-links { display: flex; align-items: center; gap: 20px; margin-top: 30px; }
+    .social-links a { color: #73798a; font-size: .9rem; font-weight: 600; }
+    .social-links a:hover { color: var(--accent); }
+    .portrait-wrap { min-height: 390px; display: grid; place-items: center; position: relative; }
+    .portrait {
+      width: min(335px, 78vw); aspect-ratio: 1; position: relative;
+      overflow: hidden; border: 10px solid rgba(255, 255, 255, .9); border-radius: 36% 64% 54% 46% / 46% 40% 60% 54%;
+      background: var(--accent-soft);
+      box-shadow: 0 28px 70px rgba(82, 71, 205, .23);
+      transform: rotate(-4deg);
+    }
+    .portrait-image { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center 22%; }
+    .float-tag {
+      position: absolute; z-index: 2; padding: 11px 16px; border: 1px solid var(--line); border-radius: 14px;
+      color: #42485a; background: var(--white); box-shadow: var(--shadow); font-size: .86rem; font-weight: 700;
+    }
+    .tag-code { top: 52px; left: 2%; }
+    .tag-creative { right: -1%; bottom: 54px; }
+
+    section { padding: 88px 0; }
+    .section-heading { margin: 0 auto 38px; text-align: center; }
+    .section-kicker { margin: 0 0 8px; color: var(--accent); font-size: .9rem; font-weight: 700; }
+    .section-title { margin: 0; font-size: clamp(2rem, 4vw, 2.65rem); line-height: 1.2; letter-spacing: -.045em; }
+    .about-section { background: var(--surface); }
+    .about-copy { max-width: 760px; margin: 0 auto; color: var(--muted); font-size: 1.04rem; text-align: center; }
+    .about-copy p { margin: 0 0 17px; }
+    .about-copy p:last-child { margin-bottom: 0; }
+    .skills-section { background: var(--white); }
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .skill-card {
+      min-height: 90px; display: flex; align-items: center; gap: 15px; padding: 20px;
+      border: 1px solid var(--line); border-radius: 16px; background: var(--white);
+      font-weight: 650; transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+    }
+    .skill-card:hover { transform: translateY(-3px); border-color: #d4d0ff; box-shadow: 0 12px 28px rgba(34, 37, 66, .06); }
+    .skill-icon { width: 42px; height: 42px; flex: 0 0 42px; display: grid; place-items: center; border-radius: 12px; color: var(--accent); background: var(--accent-soft); }
+    .skill-icon svg { width: 21px; height: 21px; }
+    .projects-section { background: var(--surface); }
+    .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .project-card {
+      overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: var(--white);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .project-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+    .project-preview { height: 190px; display: grid; place-items: center; overflow: hidden; padding: 25px; background: #eeedff; }
+    .project-preview img { width: 100%; height: 100%; object-fit: contain; }
+    .project-card:nth-child(2) .project-preview { background: #e9f4ff; }
+    .project-card:nth-child(3) .project-preview { background: #e9f7f2; }
+    .dashboard {
+      width: 100%; max-width: 285px; height: 140px; display: grid; grid-template-columns: 52px 1fr; overflow: hidden;
+      border: 5px solid rgba(255,255,255,.85); border-radius: 12px; background: var(--white);
+      box-shadow: 0 14px 30px rgba(39, 43, 79, .14); transform: rotate(-2deg);
+    }
+    .dashboard-side { display: flex; flex-direction: column; gap: 8px; padding: 13px 11px; background: #22243a; }
+    .dashboard-side i, .dashboard-body i { display: block; height: 5px; border-radius: 5px; background: #a49cff; }
+    .dashboard-side i:nth-child(2n) { width: 70%; opacity: .5; }
+    .dashboard-body { padding: 13px; }
+    .dashboard-body .dash-title { width: 57%; height: 7px; margin-bottom: 11px; background: #545b72; }
+    .dash-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; }
+    .dash-metrics i { height: 26px; background: #f0efff; }
+    .dash-chart { height: 46px; margin-top: 9px; background: linear-gradient(160deg, transparent 42%, #867bf0 43%, #867bf0 47%, transparent 48%), linear-gradient(180deg, #f6f5ff, #fff); }
+    .project-info { padding: 20px 21px 22px; }
+    .project-info h3 { margin: 0 0 8px; font-size: 1.12rem; letter-spacing: -.02em; }
+    .project-info p { min-height: 78px; margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.65; }
+    .tech-list { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 16px; }
+    .tech-list span { padding: 4px 9px; border-radius: 7px; color: #5a51c7; background: var(--accent-soft); font-size: .73rem; font-weight: 700; }
+
+    .contact-section { padding: 78px 0 70px; color: var(--white); background: #201d3d; }
+    .contact-section .section-kicker { color: #b6b0ff; }
+    .contact-section .section-title { color: var(--white); }
+    .contact-intro { max-width: 500px; margin: 13px auto 34px; color: #c4c2d5; text-align: center; }
+    .contact-details { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
+    .contact-item {
+      min-height: 54px; display: inline-flex; align-items: center; gap: 11px; padding: 12px 17px;
+      border: 1px solid rgba(255,255,255,.15); border-radius: 12px; color: #f0efff; background: rgba(255,255,255,.06);
+      font-size: .9rem;
+    }
+    a.contact-item:hover { background: rgba(255,255,255,.12); }
+    .contact-item svg { width: 19px; height: 19px; color: #aaa3ff; }
+    .contact-social { justify-content: center; margin-top: 28px; }
+    .contact-social a { color: #d1cfff; }
+    footer { padding: 18px 0; color: #8a8d9a; background: #17162b; font-size: .83rem; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .footer-inner p { margin: 0; }
+    .back-top { display: inline-flex; align-items: center; gap: 7px; color: #d4d2e7; font-weight: 600; }
+    .back-top:hover { color: var(--white); }
+    .back-top svg { width: 16px; height: 16px; }
+    :focus-visible { outline: 3px solid #8c83ff; outline-offset: 3px; }
+
+    @media (max-width: 760px) {
+      .container { width: min(100% - 40px, 560px); }
+      .nav-wrap { min-height: 68px; }
+      .menu-toggle { display: grid; }
+      .nav-links {
+        display: none; position: absolute; top: calc(100% + 1px); right: 0; left: 0;
+        padding: 12px 22px 20px; border-bottom: 1px solid var(--line); background: var(--white);
+      }
+      .nav-links.is-open { display: flex; flex-direction: column; align-items: stretch; gap: 0; }
+      .nav-links a { padding: 11px 4px; }
+      .hero { padding: 72px 0 60px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 26px; }
+      .hero-copy { font-size: 1rem; }
+      .portrait-wrap { min-height: 315px; }
+      .portrait { width: min(270px, 70vw); }
+      .tag-code { top: 36px; left: 5%; }
+      .tag-creative { right: 4%; bottom: 38px; }
+      section { padding: 68px 0; }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .skill-card { min-height: 78px; padding: 14px; gap: 10px; font-size: .88rem; }
+      .skill-icon { width: 36px; height: 36px; flex-basis: 36px; }
+      .project-grid { grid-template-columns: 1fr; gap: 17px; }
+      .project-preview { height: 175px; }
+      .project-info p { min-height: 0; }
+      .contact-details { flex-direction: column; }
+      .contact-item { justify-content: center; }
+    }
+    @media (max-width: 420px) {
+      .container { width: calc(100% - 32px); }
+      .hero { padding-top: 58px; }
+      h1 { font-size: 3rem; }
+      .actions { align-items: stretch; flex-direction: column; }
+      .actions .button { width: 100%; }
+      .social-links { gap: 16px; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body id="top">
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="#home" aria-label="Ivan Manguilimotan home">IM</a>
+      <button class="menu-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="primary-navigation">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <nav class="nav-links" id="primary-navigation" aria-label="Main navigation">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">Hello, I'm</p>
+          <h1>Ivan<br>Manguilimotan</h1>
+          <p class="hero-role">Web Developer</p>
+          <p class="hero-copy">Building clean, responsive, and modern web experiences.</p>
+          <div class="actions">
+            <a class="button button-primary" href="#projects">View My Work
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="button button-secondary" href="#contact">Contact Me
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v14H4z"/><path d="m4 7 8 6 8-6"/></svg>
+            </a>
+          </div>
+          <div class="social-links" aria-label="Social links">
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="mailto:ivanmanguilimotan@gmail.com">Email</a>
+          </div>
+        </div>
+        <div class="portrait-wrap" aria-label="Ivan Manguilimotan">
+          <span class="float-tag tag-code">Web Developer</span>
+          <div class="portrait">
+            <img class="portrait-image" src="assets/profile.png" alt="Portrait of Ivan Manguilimotan" width="412" height="457">
+          </div>
+          <span class="float-tag tag-creative">✦ &nbsp;Creative &amp; curious</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section" id="about">
+      <div class="container">
+        <header class="section-heading">
+          <p class="section-kicker">About Me</p>
+          <h2 class="section-title">Who I Am</h2>
+        </header>
+        <div class="about-copy">
+          <p>I am Ivan Manguilimotan. I am a student at Davao del Norte State College. I am passionate about web development and enjoy creating user-friendly, responsive, and modern digital experiences.</p>
+          <p>I love turning ideas into functional and engaging websites. I'm always eager to learn new technologies and improve my skills to build better solutions.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="skills-section" id="skills">
+      <div class="container">
+        <header class="section-heading">
+          <p class="section-kicker">My Skills</p>
+          <h2 class="section-title">What I Do Best</h2>
+        </header>
+        <div class="skills-grid">
+          <div class="skill-card"><span class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 4 1.5 16L12 22l6.5-2L20 4H4Z"/><path d="M8 8h8l-.4 3.5H8.3l.4 3.5 3.3.9 3.3-.9.2-2"/></svg></span>HTML</div>
+          <div class="skill-card"><span class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 4 1.5 16L12 22l6.5-2L20 4H4Z"/><path d="M8 8h8M8.5 12h7l-.4 3-3.1.9-3.1-.9"/></svg></span>CSS</div>
+          <div class="skill-card"><span class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg></span>JavaScript</div>
+          <div class="skill-card"><span class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 9v11"/></svg></span>Responsive Design</div>
+          <div class="skill-card"><span class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 1.9 5.8L20 11l-6.1 2.2L12 19l-2-5.8L4 11l6-2.2L12 3Z"/><path d="m19 15 .9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15Z"/></svg></span>UI/UX Basics</div>
+          <div class="skill-card"><span class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M7 8h4M7 12h2M15 8h2M15 12h2"/></svg></span>Front-End Development</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="projects-section" id="projects">
+      <div class="container">
+        <header class="section-heading">
+          <p class="section-kicker">Featured Projects</p>
+          <h2 class="section-title">Some Things I've Built</h2>
+        </header>
+        <div class="project-grid">
+          <article class="project-card">
+            <div class="project-preview"><img src="assets/intune-dashboard.png" alt="Microsoft Intune endpoint and identity management dashboard"></div>
+            <div class="project-info">
+              <h3>Intune Dashboard</h3>
+              <p>A comprehensive endpoint &amp; identity management dashboard with device monitoring, compliance tracking, and deployment status visualization.</p>
+              <div class="tech-list"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+            </div>
+          </article>
+          <article class="project-card">
+            <div class="project-preview"><img src="assets/facilio-dashboard.png" alt="Facilio AI-powered facilities management dashboard"></div>
+            <div class="project-info">
+              <h3>Facilio Dashboard</h3>
+              <p>An AI-powered maintenance &amp; facilities management platform featuring IoT monitoring, predictive maintenance, and energy consumption analytics.</p>
+              <div class="tech-list"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+            </div>
+          </article>
+          <article class="project-card">
+            <div class="project-preview"><img src="assets/miniorange-dashboard.png" alt="MiniOrange mobile device security and management dashboard"></div>
+            <div class="project-info">
+              <h3>MiniOrange MDM</h3>
+              <p>A mobile device security &amp; management dashboard with platform analytics, compliance monitoring, and security policy management.</p>
+              <div class="tech-list"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+      <div class="container">
+        <header class="section-heading">
+          <p class="section-kicker">Get In Touch</p>
+          <h2 class="section-title">Let's Work Together</h2>
+          <p class="contact-intro">Have a project in mind or want to say hello?<br>I'd love to hear from you.</p>
+        </header>
+        <div class="contact-details">
+          <a class="contact-item" href="mailto:ivanmanguilimotan@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
+            ivanmanguilimotan@gmail.com
+          </a>
+          <a class="contact-item" href="tel:+639123456789">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h3l2 5-2 1.5a15 15 0 0 0 4.5 4.5L16 12l5 2v3c0 1.1-.9 2-2 2C10.7 19 5 13.3 5 6c0-1.7.9-3 2-3Z"/></svg>
+            +63 912 345 6789
+          </a>
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            Tagum City, Davao del Norte, Philippines
+          </div>
+        </div>
+        <div class="social-links contact-social" aria-label="Social links">
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="mailto:ivanmanguilimotan@gmail.com">Email</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <p>© 2024 Ivan Manguilimotan. All rights reserved.</p>
+      <a class="back-top" href="#top">Back to top
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+      </a>
+    </div>
+  </footer>
+  <script>
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navigation = document.querySelector("#primary-navigation");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+      menuToggle.setAttribute("aria-expanded", String(!isOpen));
+      navigation.classList.toggle("is-open", !isOpen);
+    });
+
+    navigation.addEventListener("click", (event) => {
+      if (event.target instanceof HTMLAnchorElement) {
+        menuToggle.setAttribute("aria-expanded", "false");
+        navigation.classList.remove("is-open");
+      }
+    });
+  </script>
+</body>
+</html>
